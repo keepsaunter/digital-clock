@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        #container > div {
+            display: flex;
+        }
+        #container > div:not(:first-child) {
+            margin-left: 20px;
+        }
+        #container .number:not(:first-child) {
+            margin-left: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+</body>
+<script src="./time.js"></script>
+<script>
+    Num.initCssStyle({widthNum: 14, heightNum: 8});
+    var time = {
+        hour_1: new Num('hour', 'hour_1', 0),
+        hour_2: new Num('hour', 'hour_2', 0),
+        minute_1: new Num('minute', 'minute_1', 0),
+        minute_2: new Num('minute', 'minute_2', 0),
+        second_1: new Num('second', 'second_1', 0),
+        second_2: new Num('second', 'second_2', 0),
+    }
+
+    setTime();
+    function setTime() {
+        var dateNow = new Date();
+        var hour = dateNow.getHours(), minute = dateNow.getMinutes(), second = dateNow.getSeconds();
+        time.hour_1.setVal(Math.floor(hour / 10));
+        time.hour_2.setVal(hour % 10);
+        time.minute_1.setVal(Math.floor(minute / 10));
+        time.minute_2.setVal(minute % 10);
+        time.second_1.setVal(Math.floor(second / 10));
+        time.second_2.setVal(second % 10);
+    }
+
+    setInterval(setTime, 1000);
+</script>
+</html>
